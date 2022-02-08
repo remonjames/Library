@@ -52,12 +52,19 @@ body {
     min-height: 100vh;
     display: grid;
     grid-template-rows: 100px auto;
-    grid-template-columns: 1fr 4fr;
+    grid-template-columns: 1fr 3fr;
 }
 
 header {
     grid-column: 1 / 3;
     background-color: peachpuff;
+	display: flex;
+	align-items: center;
+}
+
+h1 {
+    font-size: 3.5em;
+	padding: 20px;
 }
 
 .sidebar {
@@ -65,8 +72,20 @@ header {
     grid-row: 2 / 3;
 }
 
-h1 {
-    font-size: 3.5em;
+li {
+	font-size: 1em;
+	display: flex;
+	flex-direction: column;
+	padding: 10px 20px;
+	gap: 10px;
+}
+
+li > button {
+	padding: 10px 0;
+	background-color: aliceblue;
+	border: 5px solid peachpuff;
+	border-radius: 10px;
+	font-size: 1em;
 }
 
 .myBooks {
@@ -94,6 +113,7 @@ h1 {
 	justify-self: flex-end;
 	color: white;
 	background-color: rgba(0, 0, 0, 0);
+	position: relative;
 }
 
 .bookTitle {
@@ -116,4 +136,10 @@ h1 {
 
 .cover input {
 	margin: 0 auto;
+}
+
+.closeBtn {
+	position: absolute;
+	right: 2px;
+	display: none;
 }
