@@ -1,10 +1,67 @@
 const myLibrary = [];
 
-function Book(title, author, pages, isRead) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.isRead = isRead;
+class Book {
+    constructor(title, author, pages, isRead) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.isRead = isRead;
+    }
+
+    addToLibrary(book) {
+        myLibrary.push(book);
+    }
+
+    createBook = (book) => {
+        const myBooks = document.querySelector(".myBooks");
+
+        let newBookCard = document.createElement("div");
+        newBookCard.classList.add("card");
+        myBooks.appendChild(newBookCard);
+
+        let newBookCover = document.createElement("div");
+        newBookCover.classList.add("cover");
+        newBookCard.appendChild(newBookCover);
+
+        let newBookTitle = document.createElement("p");
+        newBookTitle.innerText = book.title;
+        newBookTitle.classList.add("bookTitle");
+        newBookCover.appendChild(newBookTitle);
+
+        let newBookAuthor = document.createElement("p");
+        newBookAuthor.innerText = book.author;
+        newBookAuthor.classList.add("bookAuthor");
+        newBookCover.appendChild(newBookAuthor);
+
+        let newBookPages = document.createElement("p");
+        if (pages.value == 1) {
+            newBookPages.innerText = `${book.pages} page`;
+        } else {
+            newBookPages.innerText = `${book.pages} pages`;
+        }
+        newBookPages.classList.add("bookPages");
+        newBookCover.appendChild(newBookPages);
+
+        let markAsRead = document.createElement("p");
+        markAsRead.innerText = "Mark as read?"
+        newBookCover.appendChild(markAsRead);
+
+        let newBookIsRead = document.createElement("input");
+        newBookIsRead.classList.add(".isReadToggler")
+        newBookIsRead.type = "checkbox";
+        if (book.isRead) {
+            newBookIsRead.checked = true;
+        } else {
+            newBookIsRead.checked = false;
+        }
+        newBookIsRead.addEventListener("change", () => {
+            book.isRead = newBookIsRead.checked;
+        })
+        newBookCover.appendChild(newBookIsRead);
+
+        getRandomGradientBG(newBookCard);
+    }
+
 }
 
 const addBtn = document.getElementById("addBtn");
@@ -27,77 +84,10 @@ const addBook = () => {
     const isRead = document.getElementById("isRead").checked;
     let book = new Book(title, author, pages, isRead);
 
-    myLibrary.push(book);
-    createBook(book);
+    book.addToLibrary(book);
+    book.createBook(book);
 }
 
-const createBook = (book) => {
-    const myBooks = document.querySelector(".myBooks");
-
-    let newBookCard = document.createElement("div");
-    newBookCard.classList.add("card");
-    myBooks.appendChild(newBookCard);
-
-    let newBookCover = document.createElement("div");
-    newBookCover.classList.add("cover");
-    newBookCard.appendChild(newBookCover);
-
-    let newBookTitle = document.createElement("p");
-    newBookTitle.innerText = book.title;
-    newBookTitle.classList.add("bookTitle");
-    newBookCover.appendChild(newBookTitle);
-
-    let newBookAuthor = document.createElement("p");
-    newBookAuthor.innerText = book.author;
-    newBookAuthor.classList.add("bookAuthor");
-    newBookCover.appendChild(newBookAuthor);
-
-    let newBookPages = document.createElement("p");
-    if (pages.value == 1) {
-        newBookPages.innerText = `${book.pages} page`;
-    } else {
-        newBookPages.innerText = `${book.pages} pages`;
-    }
-    newBookPages.classList.add("bookPages");
-    newBookCover.appendChild(newBookPages);
-
-    let markAsRead = document.createElement("p");
-    markAsRead.innerText = "Mark as read?"
-    newBookCover.appendChild(markAsRead);
-
-    let newBookIsRead = document.createElement("input");
-    newBookIsRead.classList.add(".isReadToggler")
-    newBookIsRead.type = "checkbox";
-    if (book.isRead) {
-        newBookIsRead.checked = true;
-    } else {
-        newBookIsRead.checked = false;
-    }
-    newBookIsRead.addEventListener("change", () => {
-        book.isRead = newBookIsRead.checked;
-    })
-    newBookCover.appendChild(newBookIsRead);
-
-    // let closeBtn = document.createElement("button");
-    // closeBtn.innerText = "x";
-    // newBookCover.appendChild(closeBtn);
-    // closeBtn.classList.add("closeBtn");
-
-    // closeBtn.addEventListener {
-
-    // }
-
-    // newBookCard.addEventListener("mouseenter", () => {
-    //     closeBtn.style.display = "block";
-    // });
-
-    // newBookCard.addEventListener("mouseleave", () => {
-    //     closeBtn.style.display = "none";
-    // });
-
-
-    getRandomGradientBG(newBookCard);
-}
 
 
 const getRandomGradientBG = (e) => {
