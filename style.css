@@ -73,18 +73,22 @@ h1 {
 }
 
 li {
-	font-size: 1em;
+	
 	display: flex;
 	flex-direction: column;
 	padding: 10px 20px;
 	gap: 10px;
 }
 
+li > input {
+	font-size: 1em;
+}
+
 li > button {
 	padding: 10px 0;
 	background-color: aliceblue;
-	border: 5px solid peachpuff;
-	border-radius: 10px;
+	border: none;
+	border-radius: 7px;
 	font-size: 1em;
 }
 
